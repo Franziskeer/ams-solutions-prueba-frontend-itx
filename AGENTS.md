@@ -21,7 +21,7 @@ Usa solo los scripts del `package.json`:
 ## Git
 
 - `main` es la rama troncal. Una rama corta por hito: `chore/...` o `feat/...`.
-- Un pull request por hito y squash merge a `main`.
+- Un pull request por hito y rebase and merge a `main`.
 - Conventional Commits en inglés, sin scope.
 - La automatización de GitHub se limita a ejecutar `lint`, `test` y `build` en cada pull request.
 
