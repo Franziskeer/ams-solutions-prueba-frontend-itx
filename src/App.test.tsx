@@ -15,7 +15,7 @@ describe("App", () => {
     render(<App />);
 
     expect(screen.getByRole("banner")).toBeTruthy();
-    expect(screen.getByRole("link", { name: "Company Logo" }).getAttribute("href")).toBe("/");
+    expect(screen.getByRole("link", { name: "Inditex, ir al listado de productos" }).getAttribute("href")).toBe("/");
     expect(screen.getByText("Artículos en la cesta: 0")).toBeTruthy();
     expect(await screen.findByText("No hay productos.")).toBeTruthy();
   });
