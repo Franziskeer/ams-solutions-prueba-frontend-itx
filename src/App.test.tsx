@@ -16,7 +16,7 @@ describe("App", () => {
 
     expect(screen.getByRole("banner")).toBeTruthy();
     expect(screen.getByRole("link", { name: "Company Logo" }).getAttribute("href")).toBe("/");
-    expect(screen.getByRole("button", { name: "Artículos en la cesta: 0" })).toBeTruthy();
+    expect(screen.getByText("Artículos en la cesta: 0")).toBeTruthy();
     expect(await screen.findByText("No hay productos.")).toBeTruthy();
   });
 });

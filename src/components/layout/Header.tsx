@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { CartButton } from "../cart";
+import { CartCount } from "../cart";
 
 export function Header() {
   return (
@@ -10,7 +10,7 @@ export function Header() {
             <img src="/logo.svg" alt="Company Logo" className="h-6" />
           </Link>
 
-          <CartButton />
+          <CartCount />
         </div>
       </div>
     </header>

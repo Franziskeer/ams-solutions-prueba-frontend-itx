@@ -1,2 +1,2 @@
-export { CartButton } from './CartButton.tsx'
+export { CartCount } from './CartCount.tsx'
 export { getCartCount, setCartCount } from './cartStorage.ts'
