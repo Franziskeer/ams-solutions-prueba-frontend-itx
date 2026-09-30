@@ -1,21 +1,10 @@
 import { Link } from "react-router";
 import type { ProductListItem } from "../../domain/product.ts";
+import { formatPrice } from "./formatPrice.ts";
 
 type ProductItemProps = {
   product: ProductListItem;
 };
-
-function formatPrice(price: number | null): string {
-  if (price === null) {
-    return "No disponible";
-  }
-
-  return new Intl.NumberFormat("es-ES", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(price);
-}
 
 export function ProductItem({ product }: ProductItemProps) {
   return (
