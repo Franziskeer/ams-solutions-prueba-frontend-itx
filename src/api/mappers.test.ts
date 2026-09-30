@@ -74,6 +74,17 @@ describe("catalog mappers", () => {
     expect(product).not.toHaveProperty("chipset");
   });
 
+  it("joins text fields the API sends split into a list", () => {
+    const product = toProductDetail(
+      productDetailSchema.parse({
+        ...detail,
+        cpu: ["Deca-core (2x2.3 GHz Cortex-A72", "4x1.9 GHz Cortex-A53", "4x1.4 GHz Cortex-A53)"],
+      }),
+    );
+
+    expect(product.cpu).toBe("Deca-core (2x2.3 GHz Cortex-A72, 4x1.9 GHz Cortex-A53, 4x1.4 GHz Cortex-A53)");
+  });
+
   it("rejects a detail payload that drops a field the app depends on", () => {
     const withoutDimensions: Record<string, unknown> = { ...detail };
     delete withoutDimensions.dimentions;
