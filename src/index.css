@@ -38,6 +38,10 @@
   max-width: 72rem;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: var(--color-canvas);
   color: var(--color-ink);

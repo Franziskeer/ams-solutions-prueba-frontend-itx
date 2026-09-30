@@ -7,7 +7,7 @@ type SearchBarProps = {
 
 export function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <search className="w-full sm:w-96">
+    <search className="w-full">
       <form
         className="relative"
         onSubmit={(event) => {
