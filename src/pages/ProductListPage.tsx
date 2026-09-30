@@ -1,12 +1,35 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import { getProducts } from "../api/client.ts";
+import { ProductListEmpty, ProductListSkeleton } from "../components/product/ProductListFeedback.tsx";
 import { ProductItem } from "../components/product/ProductItem.tsx";
+import { filterProducts } from "../components/search/filterProducts.ts";
+import { SearchBar } from "../components/search/SearchBar.tsx";
 import type { ProductListItem } from "../domain/product.ts";
 
 export function ProductListPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q") ?? "";
   const [products, setProducts] = useState<ProductListItem[] | null>(null);
   const [error, setError] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
+
+  function updateQuery(nextQuery: string) {
+    setSearchParams(
+      (current) => {
+        const next = new URLSearchParams(current);
+
+        if (nextQuery === "") {
+          next.delete("q");
+        } else {
+          next.set("q", nextQuery);
+        }
+
+        return next;
+      },
+      { replace: true },
+    );
+  }
 
   useEffect(() => {
     let active = true;
@@ -49,24 +72,33 @@ export function ProductListPage() {
   }
 
   if (products === null) {
-    return (
-      <p className="text-muted" role="status">
-        Cargando productos…
-      </p>
-    );
+    return <ProductListSkeleton />;
   }
 
-  if (products.length === 0) {
-    return <p className="text-muted">No hay productos.</p>;
-  }
+  const visibleProducts = filterProducts(products, query);
+  const statusMessage = visibleProducts.length === 1 ? "1 producto" : `${visibleProducts.length} productos`;
 
   return (
-    <ul className="grid gap-8 motion-safe:animate-fade-in sm:grid-cols-2 lg:grid-cols-4">
-      {products.map((product) => (
-        <li key={product.id}>
-          <ProductItem product={product} />
-        </li>
-      ))}
-    </ul>
+    <div className="space-y-4">
+      <div className="flex justify-end">
+        <SearchBar value={query} onChange={updateQuery} />
+      </div>
+      {visibleProducts.length > 0 ? (
+        <>
+          <p className="sr-only" role="status">
+            {statusMessage}
+          </p>
+          <ul className="grid gap-8 motion-safe:animate-fade-in sm:grid-cols-2 lg:grid-cols-4">
+            {visibleProducts.map((product) => (
+              <li key={product.id}>
+                <ProductItem product={product} />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <ProductListEmpty query={products.length === 0 ? "" : query} />
+      )}
+    </div>
   );
 }
