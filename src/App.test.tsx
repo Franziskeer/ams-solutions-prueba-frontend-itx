@@ -1,22 +1,22 @@
-import { render, screen } from '@testing-library/react'
-import { beforeEach, describe, expect, it } from 'vitest'
-import App from './App.tsx'
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import App from "./App.tsx";
 
-describe('App', () => {
+vi.mock("./api/client.ts", () => ({
+  getProducts: vi.fn(() => Promise.resolve([])),
+}));
+
+describe("App", () => {
   beforeEach(() => {
-    localStorage.clear()
-  })
+    localStorage.clear();
+  });
 
-  it('shows the shared header chrome on the product list', () => {
-    render(<App />)
+  it("shows the shared header chrome on the product list", async () => {
+    render(<App />);
 
-    expect(screen.getByRole('banner')).toBeTruthy()
-    expect(
-      screen.getByRole('link', { name: 'Company Logo' }).getAttribute('href'),
-    ).toBe('/')
-    expect(
-      screen.getByRole('button', { name: 'Artículos en la cesta: 0' }),
-    ).toBeTruthy()
-    expect(screen.getByRole('main').textContent).toContain('Listado')
-  })
-})
+    expect(screen.getByRole("banner")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Company Logo" }).getAttribute("href")).toBe("/");
+    expect(screen.getByRole("button", { name: "Artículos en la cesta: 0" })).toBeTruthy();
+    expect(await screen.findByText("No hay productos.")).toBeTruthy();
+  });
+});
