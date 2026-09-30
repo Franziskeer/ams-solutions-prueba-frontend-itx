@@ -48,6 +48,31 @@ describe("ProductListPage", () => {
 
     expect(screen.getByRole("link", { name: /Flash/ }).textContent).toContain("No disponible");
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
+    expect(screen.getByRole("searchbox", { name: "Buscar por marca o modelo" })).toBeTruthy();
+  });
+
+  it("filters the list as the query changes and restores it from the url", async () => {
+    vi.mocked(getProducts).mockResolvedValue(products);
+
+    render(
+      <MemoryRouter initialEntries={["/?q=alcatel"]}>
+        <ProductListPage />
+      </MemoryRouter>,
+    );
+
+    const search = await screen.findByRole("searchbox", { name: "Buscar por marca o modelo" });
+    expect((search as HTMLInputElement).value).toBe("alcatel");
+    expect(screen.queryByRole("link", { name: /Iconia Talk S/ })).toBeNull();
+    expect(screen.getByRole("link", { name: /Flash/ })).toBeTruthy();
+
+    fireEvent.change(search, { target: { value: "inexistente" } });
+    expect(screen.queryByRole("list")).toBeNull();
+    expect(screen.getByRole("status").textContent).toContain("Sin resultados");
+    expect(screen.getByRole("status").textContent).toContain("Ningún producto coincide con «inexistente»");
+
+    fireEvent.click(screen.getByRole("button", { name: "Borrar búsqueda" }));
+    expect(screen.getAllByRole("listitem")).toHaveLength(2);
+    expect((search as HTMLInputElement).value).toBe("");
   });
 
   it("shows an error and retries the request", async () => {
