@@ -15,6 +15,10 @@ function toCameraList(value: string | string[]): string[] {
   return items.map((item) => item.trim()).filter((item) => item !== "");
 }
 
+function toText(value: string | string[]): string {
+  return typeof value === "string" ? value : value.join(", ");
+}
+
 export function toProductListItem(dto: ProductListItemDto): ProductListItem {
   return {
     id: dto.id,
@@ -28,15 +32,15 @@ export function toProductListItem(dto: ProductListItemDto): ProductListItem {
 export function toProductDetail(dto: ProductDetailDto): ProductDetail {
   return {
     ...toProductListItem(dto),
-    cpu: dto.cpu,
-    ram: dto.ram,
-    operatingSystem: dto.os,
-    screenResolution: dto.displaySize,
-    battery: dto.battery,
+    cpu: toText(dto.cpu),
+    ram: toText(dto.ram),
+    operatingSystem: toText(dto.os),
+    screenResolution: toText(dto.displaySize),
+    battery: toText(dto.battery),
     primaryCamera: toCameraList(dto.primaryCamera),
     secondaryCamera: toCameraList(dto.secondaryCmera),
-    dimensions: dto.dimentions,
-    weight: dto.weight,
+    dimensions: toText(dto.dimentions),
+    weight: toText(dto.weight),
     options: dto.options,
   };
 }
