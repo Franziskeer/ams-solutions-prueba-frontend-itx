@@ -80,8 +80,9 @@ export function ProductListPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
+      <div className="grid gap-2 lg:grid-cols-[2fr_1fr] items-center">
         <SearchBar value={query} onChange={updateQuery} />
+        <p className="text-sm text-muted uppercase lg:order-first">{visibleProducts.length} productos encontrados</p>
       </div>
       {visibleProducts.length > 0 ? (
         <>
