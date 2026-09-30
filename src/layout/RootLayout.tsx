@@ -5,7 +5,7 @@ export function RootLayout() {
   return (
     <>
       <Header />
-      <main className="container mx-auto p-4">
+      <main className="container mx-auto px-4 py-8">
         <Outlet />
       </main>
     </>

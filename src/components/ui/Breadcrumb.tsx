@@ -32,14 +32,11 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
               ) : null}
               <li>
                 {href != null ? (
-                  <Link
-                    to={href}
-                    className="text-muted underline-offset-2 hover:text-ink hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                  >
+                  <Link to={href} className="text-sm text-muted uppercase hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus">
                     {item.label}
                   </Link>
                 ) : (
-                  <span aria-current="page" className="font-medium text-ink">
+                  <span aria-current="page" className="text-sm text-ink uppercase">
                     {item.label}
                   </span>
                 )}
