@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import type { ProductListItem } from "../../domain/product.ts";
 import { formatPrice } from "./formatPrice.ts";
 
@@ -7,8 +7,10 @@ type ProductItemProps = {
 };
 
 export function ProductItem({ product }: ProductItemProps) {
+  const { search } = useLocation();
+
   return (
-    <Link to={`/product/${product.id}`} className="group space-y-4">
+    <Link to={`/product/${product.id}`} state={{ listSearch: search }} className="group space-y-4">
       <div className="overflow-hidden rounded-xl bg-surface p-4 shadow-sm">
         <img
           src={product.imageUrl}
