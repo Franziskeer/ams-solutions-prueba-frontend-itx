@@ -26,9 +26,13 @@ export function CartButton() {
   }, []);
 
   return (
-    <button type="button" aria-label={`Artículos en la cesta: ${count}`} className="relative inline-flex items-center justify-center rounded-md p-2 hover:bg-neutral-100">
+    <button
+      type="button"
+      aria-label={`Artículos en la cesta: ${count}`}
+      className="relative inline-flex items-center justify-center rounded-md p-2 text-ink hover:bg-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+    >
       <ShoppingBasket aria-hidden="true" className="size-6" />
-      <span className="absolute -top-1 -right-1 flex min-w-5 items-center justify-center rounded-full bg-neutral-900 px-1 text-xs font-medium text-white">{count}</span>
+      <span className="absolute -top-1 -right-1 flex min-w-5 items-center justify-center rounded-full bg-ink px-1 text-xs font-medium text-surface">{count}</span>
     </button>
   );
 }

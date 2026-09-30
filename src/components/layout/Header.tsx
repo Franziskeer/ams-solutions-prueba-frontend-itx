@@ -15,16 +15,24 @@ export function Header() {
   const breadcrumbItems = getBreadcrumbItems(pathname);
 
   return (
-    <header className="p-4 space-y-4">
-      <div className="flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2">
-          <img src="/logo.svg" alt="Company Logo" className="h-6" />
-        </Link>
+    <>
+      <header className="border-b border-line bg-surface">
+        <div className="container mx-auto p-4 space-y-4">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="flex items-center gap-2 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              <img src="/logo.svg" alt="Company Logo" className="h-6" />
+            </Link>
 
-        <CartButton />
-      </div>
+            <CartButton />
+          </div>
+        </div>
+      </header>
 
-      <Breadcrumb items={breadcrumbItems} />
-    </header>
+      {breadcrumbItems.length > 0 && (
+        <div className="container mx-auto p-4">
+          <Breadcrumb items={breadcrumbItems} />
+        </div>
+      )}
+    </>
   );
 }

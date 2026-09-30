@@ -26,17 +26,20 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           return (
             <Fragment key={`${item.label}-${item.to ?? "current"}`}>
               {index > 0 ? (
-                <li aria-hidden="true" className="flex items-center text-neutral-400">
+                <li aria-hidden="true" className="flex items-center text-faint">
                   <ChevronRight className="size-4" />
                 </li>
               ) : null}
               <li>
                 {href != null ? (
-                  <Link to={href} className="text-neutral-500 underline-offset-2 hover:text-neutral-900 hover:underline">
+                  <Link
+                    to={href}
+                    className="text-muted underline-offset-2 hover:text-ink hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  >
                     {item.label}
                   </Link>
                 ) : (
-                  <span aria-current="page" className="font-medium text-neutral-900">
+                  <span aria-current="page" className="font-medium text-ink">
                     {item.label}
                   </span>
                 )}
