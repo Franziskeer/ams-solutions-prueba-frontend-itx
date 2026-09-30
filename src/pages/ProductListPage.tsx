@@ -1,3 +1,3 @@
 export function ProductListPage() {
-  return <main>Listado</main>
+  return <>Listado</>;
 }
