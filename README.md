@@ -8,7 +8,7 @@ Aplicación para comprar dispositivos móviles. Tiene dos vistas: el listado de 
 - **Vite:** Sirve la aplicación en desarrollo y genera la build de producción con los scripts que exige el enunciado.
 - **Vitest:** Ejecuta los tests en el mismo entorno de Vite, que es el script test obligatorio.
 - **React Router:** Cambia entre el listado y el detalle en el cliente con el enrutado de SPA que pide la prueba.
-- **Tailwind CSS y shadcn/ui:** Tailwind agiliza el desarrollo responsive de hasta cuatro productos por fila, y shadcn/ui da un acabado consistente a los selectores y al botón de añadir al construir los componentes.
+- **Tailwind CSS y lucide-react:** Tailwind agiliza el desarrollo responsive de hasta cuatro productos por fila y lucide-react ofrece iconos limpios para una interfaz más intuitiva.
 - **ESLint:** Cubre el script lint y aplica el mismo criterio en todo el código.
 
 ## Cómo ejecutarlo
