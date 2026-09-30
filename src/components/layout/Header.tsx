@@ -7,7 +7,7 @@ export function Header() {
       <div className="container mx-auto p-4 space-y-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus">
-            <img src="/logo.svg" alt="Company Logo" className="h-6" />
+            <img src="/logo.svg" alt="Inditex, ir al listado de productos" className="h-6" />
           </Link>
 
           <CartCount />
