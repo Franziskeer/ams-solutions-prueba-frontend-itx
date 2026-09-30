@@ -77,12 +77,13 @@ export function ProductListPage() {
 
   const visibleProducts = filterProducts(products, query);
   const statusMessage = visibleProducts.length === 1 ? "1 producto" : `${visibleProducts.length} productos`;
+  const countLabel = visibleProducts.length === 1 ? "1 producto encontrado" : `${visibleProducts.length} productos encontrados`;
 
   return (
     <div className="space-y-4">
       <div className="grid gap-2 lg:grid-cols-[2fr_1fr] items-center">
         <SearchBar value={query} onChange={updateQuery} />
-        <p className="text-sm text-muted uppercase lg:order-first">{visibleProducts.length} productos encontrados</p>
+        <p className="text-sm text-muted uppercase lg:order-first">{countLabel}</p>
       </div>
       {visibleProducts.length > 0 ? (
         <>
